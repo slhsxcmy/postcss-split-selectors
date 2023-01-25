@@ -2,30 +2,24 @@
  * @type {import('postcss').PluginCreator}
  */
 module.exports = (opts = {}) => {
-  // Work with options here
+  opts; // suppress warning
 
   return {
-    postcssPlugin: 'postcss-split-selectors',
-    /*
-    Root (root, postcss) {
-      // Transform CSS AST here
-    }
-    */
+    postcssPlugin: "postcss-split-selectors",
 
-    /*
-    Declaration (decl, postcss) {
-      // The faster way to find Declaration node
-    }
-    */
+    Once(root) {
+      // split selectors by comma
+      root.walk((node) => {
+        if (!!node.selectors && node.selectors.length > 1) {
+          node.selectors.reverse().forEach((selector) => {
+            node.cloneAfter({ selector }); // cloneAfter to recurse
+          });
 
-    /*
-    Declaration: {
-      color: (decl, postcss) {
-        // The fastest way find Declaration node if you know property name
-      }
-    }
-    */
-  }
-}
+          node.remove();
+        }
+      });
+    },
+  };
+};
 
-module.exports.postcss = true
+module.exports.postcss = true;
