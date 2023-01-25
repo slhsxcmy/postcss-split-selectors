@@ -13,7 +13,7 @@
   },
   "author": "Mingyu Cui <slhsxcmy@gmail.com>",
   "license": "MIT",
-  "repository": "slhsxcmy/postcss-split-selectors",
+  "repository": "https://github.com/slhsxcmy/postcss-split-selectors",
   "engines": {
     "node": ">=12.0.0"
   },
