@@ -1,7 +1,7 @@
 {
   "name": "postcss-split-selectors",
   "version": "0.0.0",
-  "description": "PostCSS plugin that splits selectors",
+  "description": "PostCSS plugin that splits selectors by comma, then merges the same selectors under the same parent ignoring adjacency.",
   "keywords": [
     "postcss",
     "css",

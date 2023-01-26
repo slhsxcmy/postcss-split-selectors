@@ -1,18 +1,56 @@
 # postcss-split-selectors
 
-[PostCSS] plugin that splits selectors.
+[PostCSS] plugin that splits selectors by comma, then merges the same selectors under the same parent **ignoring adjacency**.
 
-[PostCSS]: https://github.com/postcss/postcss
+[postcss]: https://github.com/postcss/postcss
 
 ```css
-.foo {
-  /* Input example */
+.a {
+  p0: v0;
+}
+.a,
+.b {
+  .d {
+    p1: v1;
+  }
+  p2: v2;
+  .c,
+  .d {
+    p3: v3;
+  }
+  .c {
+    p4: v4;
+  }
+}
+.b {
+  p5: v5;
 }
 ```
 
 ```css
-.foo {
-  /* Output example */
+.a {
+  p0: v0;
+  .d {
+    p1: v1;
+    p3: v3;
+  }
+  p2: v2;
+  .c {
+    p3: v3;
+    p4: v4;
+  }
+}
+.b {
+  .d {
+    p1: v1;
+    p3: v3;
+  }
+  p2: v2;
+  .c {
+    p3: v3;
+    p4: v4;
+  }
+  p5: v5;
 }
 ```
 
