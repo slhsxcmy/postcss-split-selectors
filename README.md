@@ -4,6 +4,8 @@
 
 [postcss]: https://github.com/postcss/postcss
 
+## Example Input
+
 ```css
 .a {
   p0: v0;
@@ -26,6 +28,8 @@
   p5: v5;
 }
 ```
+
+## Example Output
 
 ```css
 .a {
