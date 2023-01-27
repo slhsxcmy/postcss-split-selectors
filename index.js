@@ -23,7 +23,7 @@ module.exports = (opts = {}) => {
       /*
                  root             root
               a1      a2    ->     a
-            b1  b2  c1  c2        b c
+            b1  c1  b2  c2        b c
       */
       // merge same selectors
       root.walk((node) => {
@@ -34,7 +34,8 @@ module.exports = (opts = {}) => {
             if (next.selector === node.selector) {
               node.append(...next.nodes);
 
-              next.remove();
+              next = next.prev();
+              next.next().remove();
             }
           }
         }
