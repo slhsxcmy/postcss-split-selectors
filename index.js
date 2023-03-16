@@ -28,15 +28,20 @@ module.exports = (opts = {}) => {
       // merge same selectors
       root.walk((node) => {
         node.raws.semicolon = true; // postcss strips final semicolon by default
-        if (node.selector) {
-          let next = node;
-          while ((next = next.next())) {
-            if (next.selector === node.selector) {
-              node.append(...next.nodes);
 
-              next = next.prev();
-              next.next().remove();
-            }
+        const isSameSelector = (node, next) =>
+          (node.type === "rule" && next.selector === node.selector) ||
+          (node.type === "atrule" &&
+            next.name === node.name &&
+            next.params === node.params);
+
+        let next = node;
+        while ((next = next.next())) {
+          if (isSameSelector(node, next)) {
+            node.append(...next.nodes);
+
+            next = next.prev();
+            next.next().remove();
           }
         }
       });

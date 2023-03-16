@@ -135,3 +135,23 @@ it("works on nested classes recursively", async () => {
     {}
   );
 });
+
+it("works on at-rules", async () => {
+  await run(
+    `
+      @atrule(params) {
+        p1: v1;
+      }
+      @atrule(params) {
+        p2: v2;
+      }
+    `,
+    `
+      @atrule(params) {
+        p1: v1;
+        p2: v2;
+      }
+    `,
+    {}
+  );
+});
