@@ -142,6 +142,9 @@ it("works on at-rules", async () => {
       @atrule(params) {
         p1: v1;
       }
+      .cls {
+        p: v;
+      }
       @atrule(params) {
         p2: v2;
       }
@@ -150,6 +153,9 @@ it("works on at-rules", async () => {
       @atrule(params) {
         p1: v1;
         p2: v2;
+      }
+      .cls {
+        p: v;
       }
     `,
     {}
